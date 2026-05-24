@@ -1,0 +1,68 @@
+@use "@assets/scss/variables" as v;
+
+.network-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: v.$spacing-xs;
+  padding: v.$spacing-lg;
+  min-height: 120px;
+  background: v.$bg-surface;
+  border: 1px solid v.$border;
+  border-radius: v.$radius;
+  color: v.$text-primary;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 60%, v.$accent-dim, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    border-color: rgba(124, 110, 247, 0.35);
+
+    &::after { opacity: 1; }
+
+    .network-card__icon { color: v.$accent; }
+  }
+
+  &:active {
+    transform: scale(0.96);
+  }
+
+  &__icon {
+    color: v.$text-muted;
+    transition: color 0.15s ease;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__count {
+    font-size: 30px;
+    font-weight: 700;
+    font-family: v.$font-ui;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: v.$text-muted;
+    position: relative;
+    z-index: 1;
+  }
+}

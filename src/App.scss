@@ -1,0 +1,9 @@
+@use "@assets/scss/variables" as v;
+
+.app {
+  min-height: 100vh;
+
+  &__container {
+    padding: 0 v.$spacing-xl v.$spacing-2xl;
+  }
+}

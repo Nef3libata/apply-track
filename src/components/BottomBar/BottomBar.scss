@@ -1,0 +1,49 @@
+@use "@assets/scss/variables" as v;
+
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 v.$spacing-xl;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid v.$border;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
+  z-index: 50;
+
+  &__left {
+    display: flex;
+    align-items: center;
+    gap: v.$spacing-sm;
+    font-size: 12px;
+    color: v.$text-secondary;
+
+    strong {
+      color: v.$text-primary;
+      font-weight: 700;
+    }
+  }
+
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: v.$accent;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 2px v.$accent-dim;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-family: v.$font-mono;
+    color: v.$text-secondary;
+  }
+}

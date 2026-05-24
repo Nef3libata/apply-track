@@ -1,0 +1,63 @@
+@use "@assets/scss/variables" as v;
+
+$sq: 12px;
+$gap: 3px;
+
+.heatmap {
+  &__body {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  &__day-labels {
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+    flex-shrink: 0;
+    padding-top: 1px;
+  }
+
+  &__day-label {
+    height: $sq;
+    font-size: 9px;
+    font-family: v.$font-mono;
+    color: v.$text-caption;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    width: 14px;
+  }
+
+  &__weeks {
+    display: flex;
+    gap: $gap;
+  }
+
+  &__week {
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+  }
+
+  &__square {
+    width: $sq;
+    height: $sq;
+    border-radius: 3px;
+    flex-shrink: 0;
+    cursor: default;
+    transition: opacity 0.15s ease, transform 0.1s ease;
+
+    &--empty  { background: v.$bg-raised; }
+    &--low    { background: rgba(13, 148, 136, 0.30); }   // accent-mid 30%
+    &--mid    { background: rgba(13, 148, 136, 0.65); }   // accent-mid 65%
+    &--high   { background: v.$accent; }
+    &--future { background: transparent; border: 1px dashed v.$border; opacity: 0.4; }
+
+    &:not(&--empty):not(&--future):hover {
+      opacity: 0.75;
+      transform: scale(1.15);
+    }
+  }
+}

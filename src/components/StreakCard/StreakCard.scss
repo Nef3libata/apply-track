@@ -1,0 +1,109 @@
+@use "@assets/scss/variables" as v;
+
+.streak-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-lg;
+  padding: v.$spacing-lg v.$spacing-xl;
+  background: v.$bg-surface;
+  border: 1px solid v.$border;
+  border-radius: v.$radius;
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 60% 100% at 0% 50%,
+      v.$streak-dim,
+      transparent
+    );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  &--active {
+    border-color: rgba(249, 115, 22, 0.25);
+
+    &::before { opacity: 1; }
+
+    .streak-card__icon {
+      background: v.$streak-dim;
+      border-color: rgba(249, 115, 22, 0.28);
+      color: v.$streak;
+      box-shadow: 0 0 20px v.$streak-glow;
+    }
+
+    .streak-card__number { color: v.$streak; }
+  }
+
+  &__icon {
+    width: 54px;
+    height: 54px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: v.$radius;
+    background: v.$bg-raised;
+    border: 1px solid v.$border-light;
+    color: v.$text-muted;
+    transition: all 0.25s ease;
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__count {
+    display: flex;
+    align-items: baseline;
+    gap: v.$spacing-sm;
+    margin-bottom: 5px;
+  }
+
+  &__number {
+    font-size: 38px;
+    font-weight: 700;
+    font-family: v.$font-ui;
+    line-height: 1;
+    color: v.$text-primary;
+    letter-spacing: -0.02em;
+    transition: color 0.25s ease;
+  }
+
+  &__unit {
+    font-size: 15px;
+    font-weight: 600;
+    color: v.$text-secondary;
+    letter-spacing: -0.01em;
+  }
+
+  &__message {
+    font-size: 12px;
+    color: v.$text-muted;
+    font-family: v.$font-mono;
+    line-height: 1.5;
+  }
+
+  &__best {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-family: v.$font-mono;
+    color: v.$text-muted;
+    white-space: nowrap;
+    align-self: flex-start;
+    padding-top: 3px;
+    position: relative;
+    z-index: 1;
+  }
+}

@@ -1,0 +1,94 @@
+@use "@assets/scss/variables" as v;
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-xl;
+  padding-bottom: 60px;
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: v.$spacing-md;
+
+    @media (max-width: 800px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-md;
+  }
+
+  &__heading {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: v.$text-caption;
+  }
+
+  &__card {
+    background: v.$bg-surface;
+    border-radius: v.$radius-lg;
+    padding: v.$spacing-lg;
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-lg;
+    box-shadow: v.$shadow-sm;
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: v.$spacing-md;
+    flex-wrap: wrap;
+  }
+
+  &__card-title {
+    font-size: 15px;
+    font-weight: 700;
+    font-family: v.$font-ui;
+    color: v.$text-primary;
+    letter-spacing: -0.02em;
+    margin-bottom: 3px;
+  }
+
+  &__card-sub {
+    font-size: 12px;
+    color: v.$text-caption;
+    font-family: v.$font-mono;
+  }
+
+  &__heatmap-legend {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  &__legend-label {
+    font-size: 10px;
+    color: v.$text-caption;
+    font-family: v.$font-mono;
+    margin: 0 3px;
+  }
+}
+
+.heatmap-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+
+  &--empty { background: v.$bg-raised; }
+  &--low   { background: rgba(13, 148, 136, 0.30); }
+  &--mid   { background: rgba(13, 148, 136, 0.65); }
+  &--high  { background: v.$accent; }
+}

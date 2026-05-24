@@ -1,0 +1,52 @@
+@use "@assets/scss/variables" as v;
+
+.city-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: v.$spacing-md;
+  }
+
+  &__city {
+    min-width: 80px;
+    font-size: 13px;
+    font-weight: 600;
+    color: v.$text-primary;
+    letter-spacing: -0.01em;
+    flex-shrink: 0;
+  }
+
+  &__track {
+    flex: 1;
+    height: 5px;
+    background: v.$bg-raised;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  &__bar {
+    height: 100%;
+    background: linear-gradient(90deg, v.$accent, v.$accent-hover);
+    border-radius: 999px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 4px;
+  }
+
+  &__count {
+    font-size: 12px;
+    font-family: v.$font-mono;
+    color: v.$text-secondary;
+    min-width: 18px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  &__empty {
+    font-size: 13px;
+    color: v.$text-muted;
+  }
+}

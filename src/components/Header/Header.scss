@@ -1,0 +1,89 @@
+@use "@assets/scss/variables" as v;
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: v.$spacing-xl 0 v.$spacing-lg;
+  border-bottom: 1px solid v.$border;
+  margin-bottom: v.$spacing-xl;
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  &__logo {
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, v.$accent-light, v.$accent);
+    border-radius: v.$radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 3px 12px v.$accent-glow;
+  }
+
+  &__title {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    font-family: v.$font-ui;
+  }
+
+  &__title-apply {
+    color: v.$text-primary;
+  }
+
+  &__title-track {
+    color: v.$accent;
+  }
+
+  &__streak {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 18px;
+    background: linear-gradient(135deg, rgb(255, 247, 237) 0%, rgb(254, 243, 199) 100%);
+    border: 1.5px solid v.$streak-border;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+
+    &:hover:not(&--inactive) {
+      box-shadow: 0 4px 16px v.$streak-glow;
+      transform: translateY(-1px);
+    }
+
+    &--inactive {
+      opacity: 0.35;
+      background: v.$bg-raised;
+      border-color: v.$border;
+    }
+  }
+
+  &__streak-flame {
+    color: v.$streak;
+
+    .header__streak--inactive & {
+      color: v.$text-caption;
+    }
+  }
+
+  &__streak-count {
+    font-size: 17px;
+    font-weight: 700;
+    color: v.$streak-dark;
+    letter-spacing: -0.03em;
+    font-family: v.$font-ui;
+  }
+
+  &__streak-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: v.$text-secondary;
+    letter-spacing: 0.01em;
+  }
+}

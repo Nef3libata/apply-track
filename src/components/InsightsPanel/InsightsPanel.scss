@@ -1,0 +1,47 @@
+@use "@assets/scss/variables" as v;
+
+.insights-panel {
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-sm;
+
+  &__card {
+    display: flex;
+    align-items: flex-start;
+    gap: v.$spacing-md;
+    padding: v.$spacing-md;
+    background: v.$bg-surface;
+    border: 1px solid v.$border;
+    border-radius: v.$radius;
+    transition: border-color 0.2s ease;
+
+    &:hover {
+      border-color: v.$border-light;
+    }
+
+    &--offer   .insights-panel__icon { color: v.$green;  background: v.$green-dim; }
+    &--streak  .insights-panel__icon { color: v.$streak; background: v.$streak-dim; }
+    &--warning .insights-panel__icon { color: v.$yellow; background: v.$yellow-dim; }
+    &--tip     .insights-panel__icon { color: v.$accent; background: v.$accent-dim; }
+    &--info    .insights-panel__icon { color: v.$blue;   background: v.$blue-dim; }
+  }
+
+  &__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: v.$radius-xs;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  &__text {
+    font-size: 13px;
+    font-family: v.$font-body;
+    line-height: 1.65;
+    color: v.$text-secondary;
+    padding-top: 4px;
+  }
+}

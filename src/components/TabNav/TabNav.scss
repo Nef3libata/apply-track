@@ -1,0 +1,55 @@
+@use "@assets/scss/variables" as v;
+
+.tab-nav {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid v.$border;
+  margin-bottom: v.$spacing-xl;
+
+  &__tab {
+    position: relative;
+    flex: 1;
+    height: 50px;
+    padding: 0 v.$spacing-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: v.$font-ui;
+    color: #0f766e;            
+    letter-spacing: -0.01em;
+    background: none;
+    border: none;
+    transition: color 0.15s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 16px;
+      right: 16px;
+      height: 3px;
+      background: v.$accent;
+      border-radius: 3px 3px 0 0;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      transform: scaleX(0.6);
+    }
+
+    &:hover {
+      color: v.$text-secondary;
+    }
+
+    &--active {
+      color: v.$text-primary;
+      font-weight: 700;
+
+      &::after {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+  }
+}

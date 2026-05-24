@@ -1,0 +1,44 @@
+@use "@assets/scss/variables" as v;
+
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+
+  &__chip {
+    height: 34px;
+    padding: 0 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    color: v.$text-secondary;
+    background: v.$bg-surface;
+    border: 1.5px solid v.$border;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.15s ease;
+    box-shadow: v.$shadow-sm;
+
+    &:hover {
+      color: v.$text-primary;
+      border-color: v.$border-light;
+      box-shadow: v.$shadow-md;
+    }
+
+    &--active {
+      color: v.$accent;
+      border-color: rgba(15, 118, 110, 0.40);
+      background: v.$accent-dim;
+      box-shadow: none;
+    }
+  }
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+}

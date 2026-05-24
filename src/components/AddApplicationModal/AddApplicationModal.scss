@@ -1,0 +1,177 @@
+@use "@assets/scss/variables" as v;
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 25, 23, 0.35);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: v.$spacing-md;
+}
+
+.modal {
+  width: 100%;
+  max-width: 500px;
+  background: v.$bg-surface;
+  border: 1px solid v.$border;
+  border-radius: v.$radius-lg;
+  padding: v.$spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: v.$spacing-lg;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.14),
+    0 8px 24px rgba(0, 0, 0, 0.08);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: v.$font-ui;
+    color: v.$text-primary;
+    letter-spacing: -0.02em;
+  }
+
+  &__close {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: v.$radius-xs;
+    color: v.$text-secondary;
+
+    &:hover {
+      color: v.$text-primary;
+      background: v.$bg-raised;
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-md;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: v.$spacing-md;
+
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: v.$text-muted;
+  }
+
+  &__label-hint {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 11px;
+  }
+
+  &__input,
+  &__select,
+  &__textarea {
+    width: 100%;
+    padding: 10px 12px;
+    background: v.$bg-raised;
+    border: 1px solid v.$border;
+    border-radius: v.$radius-sm;
+    color: v.$text-primary;
+    font-size: 13px;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    appearance: none;
+
+    &::placeholder {
+      color: v.$text-muted;
+    }
+
+    &:focus {
+      border-color: v.$accent;
+      box-shadow: 0 0 0 3px v.$accent-dim;
+      background: v.$bg-surface;
+      outline: none;
+    }
+  }
+
+  &__select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23B5B0AB' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 32px;
+
+    option {
+      background: v.$bg-surface;
+      color: v.$text-primary;
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 80px;
+    font-family: inherit;
+    line-height: 1.6;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: v.$spacing-sm;
+    padding-top: v.$spacing-xs;
+  }
+
+  &__btn {
+    height: 40px;
+    padding: 0 v.$spacing-lg;
+    border-radius: v.$radius-sm;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+
+    &--cancel {
+      background: v.$bg-raised;
+      color: v.$text-secondary;
+      border: 1px solid v.$border;
+
+      &:hover {
+        color: v.$text-primary;
+        border-color: v.$border-light;
+        background: v.$bg-secondary;
+      }
+    }
+
+    &--submit {
+      background: v.$accent;
+      color: #fff;
+
+      &:hover {
+        background: v.$accent-hover;
+        box-shadow: 0 2px 12px v.$accent-glow;
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@use "@assets/scss/variables" as v;
+
+.hero-card {
+  position: relative;
+  padding: v.$spacing-xl v.$spacing-xl v.$spacing-lg;
+  background: linear-gradient(135deg, rgb(240, 253, 249) 0%, rgb(236, 253, 245) 50%, rgb(240, 253, 249) 100%);
+  border: 1px solid rgba(20, 184, 166, 0.22);
+  border-radius: v.$radius-lg;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.12), transparent 65%);
+    pointer-events: none;
+  }
+
+  &__date {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: v.$accent-mid;
+    margin-bottom: v.$spacing-sm;
+    font-family: v.$font-mono;
+  }
+
+  &__message {
+    font-size: 26px;
+    font-weight: 700;
+    font-family: v.$font-ui;
+    color: #134e4a;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+
+    @media (max-width: 500px) {
+      font-size: 21px;
+    }
+  }
+
+  &__summary {
+    font-size: 13px;
+    color: v.$accent-mid;
+    font-family: v.$font-body;
+    font-weight: 500;
+  }
+}

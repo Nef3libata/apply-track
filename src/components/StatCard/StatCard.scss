@@ -1,0 +1,81 @@
+@use "@assets/scss/variables" as v;
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  padding: v.$spacing-lg;
+  background: v.$bg-surface;
+  border-radius: v.$radius-lg;
+  box-shadow: v.$shadow-sm;
+  min-height: 120px;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, v.$accent-light, rgba(20, 184, 166, 0.3));
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover {
+    box-shadow: v.$shadow-md;
+    transform: translateY(-1px);
+
+    &::before { opacity: 1; }
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: v.$spacing-sm;
+  }
+
+  &__label {
+    font-size: 12px;          // 11→12px: AA accessible minimum
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: v.$text-muted;     // #78716c: AA on white
+  }
+
+  &__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__value {
+    font-size: 42px;
+    font-weight: 800;
+    font-family: v.$font-ui;
+    color: v.$text-primary;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+
+    &--accent {
+      color: v.$accent;
+    }
+  }
+
+  &__sub {
+    font-size: 12px;
+    color: v.$text-muted;    // #78716c instead of caption — it's real content
+    font-family: v.$font-mono;
+  }
+}

@@ -7,16 +7,25 @@
   border: 1px solid rgba(20, 184, 166, 0.22);
   border-radius: v.$radius-lg;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: v.$spacing-xl;
 
   &::before {
     content: "";
     position: absolute;
     top: -40px;
-    right: -40px;
-    width: 260px;
-    height: 260px;
-    background: radial-gradient(circle, rgba(20, 184, 166, 0.12), transparent 65%);
+    right: 130px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(20, 184, 166, 0.08), transparent 65%);
     pointer-events: none;
+  }
+
+  &__content {
+    flex: 1;
+    min-width: 0;
   }
 
   &__date {
@@ -47,5 +56,52 @@
     color: v.$accent-mid;
     font-family: v.$font-body;
     font-weight: 500;
+  }
+
+  &__ring-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__ring-legend {
+    display: flex;
+    gap: 10px;
+    font-size: 10px;
+    font-family: v.$font-mono;
+    color: v.$text-muted;
+    white-space: nowrap;
+  }
+
+  &__ring-dot {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    &--tech::before { background: v.$accent; }
+    &--gen::before  { background: v.$streak; }
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: v.$spacing-lg;
+
+    &__ring-wrap {
+      align-self: center;
+    }
   }
 }

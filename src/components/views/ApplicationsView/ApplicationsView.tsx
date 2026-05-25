@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Download, Plus, Trash2 } from "lucide-react";
+import { Download, Pencil, Plus, Trash2 } from "lucide-react";
 import { useAppStore } from "@core/store/useAppStore";
+import type { Application } from "@core/models/types";
 import { FilterChips } from "@components/FilterChips/FilterChips";
 import { StatusBadge } from "@components/StatusBadge/StatusBadge";
 import { AddApplicationModal } from "@components/AddApplicationModal/AddApplicationModal";
@@ -22,7 +23,8 @@ const getCompanyColor = (name: string): string =>
   COMPANY_COLORS[name.charCodeAt(0) % COMPANY_COLORS.length]!;
 
 export const ApplicationsView = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddOpen, setIsAddOpen] = useState(false);
+  const [editingApp, setEditingApp] = useState<Application | null>(null);
 
   const applications = useAppStore((s) => s.applications);
   const activeFilter = useAppStore((s) => s.activeFilter);
@@ -55,7 +57,7 @@ export const ApplicationsView = () => {
           </button>
           <button
             className="applications__add-btn"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsAddOpen(true)}
             aria-label="Add application"
           >
             <Plus size={14} strokeWidth={2.5} />
@@ -100,6 +102,13 @@ export const ApplicationsView = () => {
                 <div className="app-row__right">
                   <span className="app-row__date">{formatDate(app.date)}</span>
                   <button
+                    className="app-row__edit"
+                    onClick={() => setEditingApp(app)}
+                    aria-label={`Edit ${app.company} application`}
+                  >
+                    <Pencil size={13} />
+                  </button>
+                  <button
                     className="app-row__delete"
                     onClick={() => removeApplication(app.id)}
                     aria-label={`Remove ${app.company} application`}
@@ -114,8 +123,14 @@ export const ApplicationsView = () => {
       )}
 
       <AddApplicationModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isAddOpen}
+        onClose={() => setIsAddOpen(false)}
+      />
+
+      <AddApplicationModal
+        isOpen={!!editingApp}
+        onClose={() => setEditingApp(null)}
+        application={editingApp ?? undefined}
       />
     </div>
   );

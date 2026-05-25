@@ -1,12 +1,13 @@
 import { useEffect, useRef, type FormEvent } from "react";
 import { X } from "lucide-react";
-import type { ApplicationStatus, ApplicationType } from "@core/models/types";
+import type { Application, ApplicationStatus, ApplicationType } from "@core/models/types";
 import { useAppStore } from "@core/store/useAppStore";
 import "./AddApplicationModal.scss";
 
 interface AddApplicationModalProps {
   isOpen: boolean;
   onClose: () => void;
+  application?: Application;
 }
 
 const STATUS_OPTIONS: ApplicationStatus[] = [
@@ -28,9 +29,12 @@ const STATUS_LABELS: Record<ApplicationStatus, string> = {
 export const AddApplicationModal = ({
   isOpen,
   onClose,
+  application,
 }: AddApplicationModalProps) => {
   const addApplication = useAppStore((s) => s.addApplication);
+  const updateApplication = useAppStore((s) => s.updateApplication);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const isEditMode = !!application;
 
   useEffect(() => {
     if (!isOpen) return;
@@ -71,15 +75,23 @@ export const AddApplicationModal = ({
     const form = e.currentTarget;
     const data = new FormData(form);
 
-    addApplication({
+    const fields = {
       company: (data.get("company") as string).trim(),
       role: (data.get("role") as string).trim(),
       city: (data.get("city") as string).trim(),
       type: data.get("type") as ApplicationType,
       status: data.get("status") as ApplicationStatus,
-      date: new Date().toISOString().split("T")[0]!,
       notes: ((data.get("notes") as string) ?? "").trim() || undefined,
-    });
+    };
+
+    if (isEditMode) {
+      updateApplication(application.id, fields);
+    } else {
+      addApplication({
+        ...fields,
+        date: new Date().toISOString().split("T")[0]!,
+      });
+    }
 
     form.reset();
     onClose();
@@ -100,7 +112,7 @@ export const AddApplicationModal = ({
       <div className="modal" ref={dialogRef}>
         <div className="modal__header">
           <h2 className="modal__title" id="modal-title">
-            Add Application
+            {isEditMode ? "Edit Application" : "Add Application"}
           </h2>
           <button
             className="modal__close"
@@ -125,6 +137,7 @@ export const AddApplicationModal = ({
                 placeholder="e.g. Zalando"
                 required
                 autoComplete="off"
+                defaultValue={application?.company}
               />
             </div>
 
@@ -140,6 +153,7 @@ export const AddApplicationModal = ({
                 placeholder="e.g. Frontend Developer"
                 required
                 autoComplete="off"
+                defaultValue={application?.role}
               />
             </div>
           </div>
@@ -157,6 +171,7 @@ export const AddApplicationModal = ({
                 placeholder="e.g. Berlin"
                 required
                 autoComplete="off"
+                defaultValue={application?.city}
               />
             </div>
 
@@ -164,7 +179,13 @@ export const AddApplicationModal = ({
               <label className="modal__label" htmlFor="type">
                 Type
               </label>
-              <select id="type" name="type" className="modal__select" required>
+              <select
+                id="type"
+                name="type"
+                className="modal__select"
+                required
+                defaultValue={application?.type ?? "tech"}
+              >
                 <option value="tech">Tech</option>
                 <option value="general">General</option>
               </select>
@@ -180,6 +201,7 @@ export const AddApplicationModal = ({
               name="status"
               className="modal__select"
               required
+              defaultValue={application?.status ?? "applied"}
             >
               {STATUS_OPTIONS.map((s) => (
                 <option key={s} value={s}>
@@ -200,6 +222,7 @@ export const AddApplicationModal = ({
               className="modal__textarea"
               placeholder="Any notes about the role or process..."
               rows={3}
+              defaultValue={application?.notes}
             />
           </div>
 
@@ -212,7 +235,7 @@ export const AddApplicationModal = ({
               Cancel
             </button>
             <button type="submit" className="modal__btn modal__btn--submit">
-              Add Application
+              {isEditMode ? "Save Changes" : "Add Application"}
             </button>
           </div>
         </form>

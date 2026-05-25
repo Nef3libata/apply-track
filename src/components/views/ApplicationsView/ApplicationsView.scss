@@ -111,6 +111,7 @@
     box-shadow: v.$shadow-md;
     transform: translateY(-1px);
 
+    .app-row__edit,
     .app-row__delete {
       opacity: 1;
     }
@@ -177,6 +178,7 @@
     white-space: nowrap;
   }
 
+  &__edit,
   &__delete {
     width: 30px;
     height: 30px;
@@ -187,11 +189,17 @@
     color: v.$text-caption;
     opacity: 0;
     transition: all 0.15s ease;
+  }
 
-    &:hover {
-      color: v.$red;
-      background: v.$red-dim;
-      opacity: 1;
-    }
+  &__edit:hover {
+    color: v.$accent;
+    background: v.$accent-dim;
+    opacity: 1;
+  }
+
+  &__delete:hover {
+    color: v.$red;
+    background: v.$red-dim;
+    opacity: 1;
   }
 }

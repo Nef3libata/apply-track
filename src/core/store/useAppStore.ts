@@ -22,6 +22,7 @@ interface AppStore {
   activeFilter: FilterValue;
   addApplication: (app: Omit<Application, "id">) => void;
   removeApplication: (id: string) => void;
+  updateApplication: (id: string, fields: Partial<Omit<Application, "id">>) => void;
   updateApplicationStatus: (id: string, status: ApplicationStatus) => void;
   setActiveTab: (tab: TabId) => void;
   setActiveFilter: (filter: FilterValue) => void;
@@ -47,6 +48,13 @@ export const useAppStore = create<AppStore>()(
       removeApplication: (id) =>
         set((state) => ({
           applications: state.applications.filter((a) => a.id !== id),
+        })),
+
+      updateApplication: (id, fields) =>
+        set((state) => ({
+          applications: state.applications.map((a) =>
+            a.id === id ? { ...a, ...fields } : a
+          ),
         })),
 
       updateApplicationStatus: (id, status) =>

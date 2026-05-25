@@ -1,14 +1,21 @@
 import { useState } from "react";
-import { Plus, Trash2 } from "lucide-react";
+import { Download, Plus, Trash2 } from "lucide-react";
 import { useAppStore } from "@core/store/useAppStore";
 import { FilterChips } from "@components/FilterChips/FilterChips";
 import { StatusBadge } from "@components/StatusBadge/StatusBadge";
 import { AddApplicationModal } from "@components/AddApplicationModal/AddApplicationModal";
+import { exportApplicationsToCSV } from "@core/utils/csv";
 import "./ApplicationsView.scss";
 
 const COMPANY_COLORS = [
-  "#0d9488", "#2563eb", "#7c3aed", "#d97706",
-  "#059669", "#ea580c", "#0891b2", "#6d28d9",
+  "#0d9488",
+  "#2563eb",
+  "#7c3aed",
+  "#d97706",
+  "#059669",
+  "#ea580c",
+  "#0891b2",
+  "#6d28d9",
 ];
 
 const getCompanyColor = (name: string): string =>
@@ -36,18 +43,30 @@ export const ApplicationsView = () => {
     <div className="applications">
       <div className="applications__toolbar">
         <FilterChips />
-        <button
-          className="applications__add-btn"
-          onClick={() => setIsModalOpen(true)}
-          aria-label="Add application"
-        >
-          <Plus size={14} strokeWidth={2.5} />
-          Add Application
-        </button>
+        <div className="applications__actions">
+          <button
+            className="applications__export-btn"
+            onClick={() => exportApplicationsToCSV(applications)}
+            disabled={applications.length === 0}
+            aria-label="Export applications to CSV"
+          >
+            <Download size={14} strokeWidth={2.5} />
+            Export CSV
+          </button>
+          <button
+            className="applications__add-btn"
+            onClick={() => setIsModalOpen(true)}
+            aria-label="Add application"
+          >
+            <Plus size={14} strokeWidth={2.5} />
+            Add Application
+          </button>
+        </div>
       </div>
 
       <p className="applications__count">
-        {filtered.length} {filtered.length === 1 ? "application" : "applications"}
+        {filtered.length}{" "}
+        {filtered.length === 1 ? "application" : "applications"}
       </p>
 
       {filtered.length === 0 ? (

@@ -14,6 +14,41 @@
     flex-wrap: wrap;
   }
 
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: v.$spacing-sm;
+    flex-shrink: 0;
+  }
+
+  &__export-btn {
+    height: 40px;
+    padding: 0 v.$spacing-lg;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 700;
+    color: v.$text-muted;
+    background: v.$bg-surface;
+    border: 1.5px solid v.$border;
+    border-radius: 999px;
+    flex-shrink: 0;
+    letter-spacing: -0.01em;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+
+    &:hover:not(:disabled) {
+      color: v.$text-primary;
+      border-color: v.$text-muted;
+      background: v.$bg-raised;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
   &__add-btn {
     height: 40px;
     padding: 0 v.$spacing-lg;
